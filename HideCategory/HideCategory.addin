@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>HideCategory</Text>
+    <Description>Hide selected category in all views</Description>
+    <Assembly>HideCategory.dll</Assembly>
+    <FullClassName>HideCategory.Command</FullClassName>
+    <ClientId>b8a55a49-5edb-495f-8fd2-647504fbc750</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
