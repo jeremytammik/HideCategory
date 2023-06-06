@@ -70,7 +70,7 @@ namespace HideCategory
       d.MainInstruction = $"Category '{cat.Name}' hidden"
         + $" in {nVok} views; {nVbad} views skipped:";
       d.MainContent = $"OK: {string.Join(", ", viewnameOk.ToArray())}"
-        + $"\r\nSkipped: {string.Join(", ", viewnameBad.ToArray())}";
+        + $"\r\n\r\nSkipped: {string.Join(", ", viewnameBad.ToArray())}";
       d.Show();
 
       return Result.Succeeded;
