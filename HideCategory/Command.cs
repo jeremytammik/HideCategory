@@ -4,6 +4,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using System;
 using System.Collections.Generic;
 using PickObjectsCanceled = Autodesk.Revit.Exceptions.OperationCanceledException;
 #endregion
@@ -44,8 +45,10 @@ namespace HideCategory
       bool hide = true;
       int nVok = 0;
       int nVbad = 0;
+      int nVbadX = 0;
       List<string> viewnameOk = new List<string>();
       List<string> viewnameBad = new List<string>();
+      List<string> viewnameBadX = new List<string>();
 
       using (Transaction tx = new Transaction(doc))
       {
@@ -63,6 +66,12 @@ namespace HideCategory
             viewnameBad.Add(v.Name);
             ++nVbad;
           }
+          catch(Exception ex)
+          {
+            viewnameBadX.Add($"{v.Name}({ex.GetType()})");
+            ++nVbadX;
+
+          }
         }
         tx.Commit();
       }
@@ -70,7 +79,8 @@ namespace HideCategory
       d.MainInstruction = $"Category '{cat.Name}' hidden"
         + $" in {nVok} views; {nVbad} views skipped:";
       d.MainContent = $"OK: {string.Join(", ", viewnameOk.ToArray())}"
-        + $"\r\n\r\nSkipped: {string.Join(", ", viewnameBad.ToArray())}";
+        + $"\r\n\r\nSkipped: {string.Join(", ", viewnameBad.ToArray())}"
+        + $"\r\n\r\nSkippedX: {string.Join(", ", viewnameBadX.ToArray())}";
       d.Show();
 
       return Result.Succeeded;
